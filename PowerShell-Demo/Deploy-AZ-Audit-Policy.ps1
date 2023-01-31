@@ -1,12 +1,13 @@
 
 # Define the tags that you wish to check for 
 $tag1 = "technical-owner"
+$tag2 = "maintenance-window"
 
 # Define Policy Definition and Assingment Names/Descriptions
 $defName = "Audit Resource Tags"
 $defDesc = "Audits all resources to ensure necessary tags are created"
-$assignName = "Audit Resource Tags - $tag1"
-$assignDesc = "Audits all applicable resources to verify if the tag '$tag1' is present"
+$assignName = "Audit Resource Tags - $tag1 and $tag2"
+$assignDesc = "Audits all applicable resources to verify if the tags '$tag1' and '$tag2' are present"
 
 # Creates the Policy Definition
 $definitions = New-AzPolicyDefinition -Name $defName `
@@ -16,7 +17,7 @@ $definitions = New-AzPolicyDefinition -Name $defName `
 -Parameter https://raw.githubusercontent.com/prasanpro/Azure.Policy.Demos/master/PowerShell-Demo/AZPolicy-Audit-Tag-Name-Parameters.json
 
 # Defines the Required resource tags your auditing
-$policyParameters = @{tagName1=$tag1}
+$policyParameters = @{tagName1=$tag1;tagName2=$tag2}
 
 # Defines the current subscription as the scope for the policy
 $sub = "/subscriptions/" + (Get-AzContext).Subscription.Id
